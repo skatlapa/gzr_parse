@@ -28,9 +28,9 @@ class GZR_PARSE(object):
                     with open(my_json_path, 'r') as myjson:
                         data = myjson.read()
                         parsed_json = json.loads(data)
+                        trash_path = Path(f"Bad_Jsons_{self.gzr_instance}")
                         try:
                             if parsed_json['deleted_at'] is not None:
-                                trash_path = Path(f"Bad_Jsons_{self.gzr_instance}")
                                 trash_path.mkdir(exist_ok=True)
                                 shutil.move(my_json_path, trash_path)
                                 print(f"file {my_json_path} has been moved to {trash_path} as it's trashed")
