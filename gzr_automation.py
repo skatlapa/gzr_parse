@@ -1,13 +1,15 @@
-import pandas as pd
+import sys
 import subprocess
-from pathlib import Path
 import configparser
 import os
 import time
 import shutil
 import json
+
 import click
-import sys
+import pandas as pd
+
+from pathlib import Path
 
 class GZR_PARSE(object):
 
@@ -98,9 +100,9 @@ class GZR_PARSE(object):
             ctitle = row['Title']
             save_location = row['Department']
             cid = int(row['ID'])
-            if row['Type'] == 'looks':
+            if row['Type'] == 'looks' or row['Type'] == 'Look' or row['Type'] == 'look':
                 ctype = 'Look'
-            elif row['Type'] == 'dashboards':
+            elif row['Type'] == 'dashboards' or row['Type'] == 'Dashboard' or row['Type'] == 'dashboard':
                 ctype = 'Dashboard'
             self.run_gzr_command(ctype, cid, save_location, client_id, client_secret)
             print(f'downloading {ctitle} to {self.start_path}/{save_location}/dashboard')
