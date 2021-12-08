@@ -123,8 +123,8 @@ def main(looker_ini, source_csv, gzr_instance, start_path):
     config.read(looker_ini)
     client_id_var = config.get('main', 'client_id')
     client_secret_var = config.get('main', 'client_secret')
-    host_var = config.get('main', 'base_url')
-    port_var = host_var.split(':')[-1]
+    #host_var = config.get('main', 'base_url')
+    #port_var = host_var.split(':')[-1]
     df = pd.read_csv(source_csv)
 
     gzr_parse.create_folders(df, ['Department'], ['look', 'dashboard'], 'Dept_Folders')
