@@ -28,12 +28,16 @@ class GZR_PARSE(object):
                     with open(my_json_path, 'r') as myjson:
                         data = myjson.read()
                         parsed_json = json.loads(data)
-                        if parsed_json['deleted_at'] is not None:
+                        try:
+                            if parsed_json['deleted_at'] is not None:
                             trash_path = Path(f"Bad_Jsons_{self.gzr_instance}")
                             trash_path.mkdir(exist_ok=True)
                             shutil.move(my_json_path, trash_path)
                             print(f"file {my_json_path} has been moved to {trash_path} as it's trashed")
-
+                        except KeyError as ke:
+                            print(f"Key Error: File {my_json_path} cannot be moved to {trash_path} due to {ke}")
+                        except Exception as e:
+                            print(f"General Error: File {my_json_path} cannot be moved to {trash_path} due to {e}")
 
     def failed_file_list(self, file_name):
         with open('dodgy_entries.txt', 'a+') as w_fd:
