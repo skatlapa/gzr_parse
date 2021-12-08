@@ -13,7 +13,6 @@ class GZR_PARSE(object):
 
 
     def __init__(self, looker_ini, source_csv, gzr_instance, start_path):
-        #self.looker_ini = looker_ini
         self.source_csv = source_csv
         self.gzr_instance = gzr_instance
         self.start_path = start_path
@@ -92,8 +91,6 @@ class GZR_PARSE(object):
                 ctype = 'Look'
                 ctitle = row['Title']
                 save_location = row['Department']
-                #client_id = client_id_var
-                #client_secret = client_secret_var
                 cid = int(row['ID'])
                 self.run_gzr_command(
                     ctype=ctype,
@@ -107,8 +104,6 @@ class GZR_PARSE(object):
                 ctype = 'Dashboard'
                 ctitle = row['Title']
                 save_location = row['Department']
-                #client_id = client_id_var
-                #client_secret = client_secret_var
                 cid = row['ID']
                 self.run_gzr_command(
                     ctype=ctype,
@@ -129,7 +124,6 @@ def main(looker_ini, source_csv, gzr_instance, start_path):
 
     gzr_parse = GZR_PARSE(looker_ini, source_csv, gzr_instance, start_path)
 
-    #gzr_parse.looker_ini = looker_ini
     gzr_parse.source_csv = source_csv
     gzr_parse.gzr_instance = gzr_instance
     gzr_parse.start_path = start_path
