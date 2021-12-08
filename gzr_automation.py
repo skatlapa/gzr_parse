@@ -39,6 +39,7 @@ class GZR_PARSE(object):
                         except Exception as e:
                             print(f"General Error: File {my_json_path} cannot be moved to {trash_path} due to {e}")
 
+
     def failed_file_list(self, file_name):
         with open('dodgy_entries.txt', 'a+') as w_fd:
             w_fd.write(f"{file_name}\n")
@@ -94,32 +95,15 @@ class GZR_PARSE(object):
 
     def iteration(self, df, client_id, client_secret):
         for index, row in df.iterrows():
+            ctitle = row['Title']
+            save_location = row['Department']
+            cid = int(row['ID'])
             if row['Type'] == 'looks':
                 ctype = 'Look'
-                ctitle = row['Title']
-                save_location = row['Department']
-                cid = int(row['ID'])
-                self.run_gzr_command(
-                    ctype=ctype,
-                    cid=cid,
-                    save_location=save_location,
-                    client_id=client_id,
-                    client_secret=client_secret)
-                print(
-                    f'downloading {ctitle} to {self.start_path}/{save_location}/look')
             elif row['Type'] == 'dashboards':
                 ctype = 'Dashboard'
-                ctitle = row['Title']
-                save_location = row['Department']
-                cid = row['ID']
-                self.run_gzr_command(
-                    ctype=ctype,
-                    cid=cid,
-                    save_location=save_location,
-                    client_id=client_id,
-                    client_secret=client_secret)
-                print(
-                    f'downloading {ctitle} to {self.start_path}/{save_location}/dashboard')
+            self.run_gzr_command(ctype, cid, save_location, client_id, client_secret)
+            print(f'downloading {ctitle} to {self.start_path}/{save_location}/dashboard')
 
 
 @click.command()
