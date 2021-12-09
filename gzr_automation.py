@@ -100,9 +100,8 @@ class GZR_PARSE(object):
         for index, row in df.iterrows():
             ctitle = row['Title']
             save_location = row['Department']
-            if row['ID'] == '#N/A' or not row['ID']:
+            if pd.isnull(df['ID'][index]):
                 continue
-
             cid = int(row['ID'])
             if row['Type'] == 'looks' or row['Type'] == 'Look' or row['Type'] == 'look':
                 ctype = 'Look'
