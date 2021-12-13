@@ -19,6 +19,7 @@ class GZR_PARSE(object):
         self.source_csv = source_csv
         self.gzr_instance = gzr_instance
         self.start_path = start_path
+        self.content_names = set()
 
 
     def validate_jsons(self):
@@ -41,6 +42,34 @@ class GZR_PARSE(object):
                             print(f"Key Error: File {my_json_path} cannot be moved to {trash_path} due to {ke}")
                         except Exception as e:
                             print(f"General Error: File {my_json_path} cannot be moved to {trash_path} due to {e}")
+
+
+    def cleanse_jsons(self):
+        root_dir = self.start_path
+        for subdir, dirs, files in os.walk(root_dir):
+            for file in files:
+                split = file.split('.')
+                if split[-1] == 'json':
+                    my_json_path = os.path.join(subdir, file)
+                    with open(my_json_path, 'r+') as myjson_fd:
+                        parsed_json = json.load(myjson_fd)
+                        try:
+                            if parsed_json["title"]:
+                                if parsed_json["title"] not in self.content_names:
+                                    self.content_names.add(parsed_json["title"])
+                                else:
+                                    #suffix = parsed_json["space"]["name"].replace("\\ ", "_")  #TODO: Check if spaces need to be stripped
+                                    suffix = parsed_json["space"]["name"]
+                                    orig_title = parsed_json["title"]
+                                    parsed_json["title"] = f"{orig_title}_{suffix}" # To preserve spaces with python F-strings
+                                    myjson_fd.seek(0)
+                                    json.dump(parsed_json, myjson_fd)
+                                    myjson_fd.truncate()
+                                    self.content_names.add(parsed_json["title"])    # To check
+                        except KeyError as ke:
+                            print(f"Key Error: File {my_json_path} cannot be parsed due to {ke}")
+                        except Exception as e:
+                            print(f"General Error: File {my_json_path} cannot be parsed due to {e}")
 
 
     def failed_file_list(self, file_name):
@@ -135,6 +164,8 @@ def main(looker_ini, source_csv, gzr_instance, start_path):
     gzr_parse.create_folders(df, ['Department'], ['look', 'dashboard'], 'Dept_Folders')
     gzr_parse.iteration(df, client_id_var, client_secret_var)
     gzr_parse.validate_jsons()
+    gzr_parse.cleanse_jsons()
+    #print(gzr_parse.content_names) #TODO: Remove to debug
 
 if __name__ == '__main__':
     sys.exit(main())
