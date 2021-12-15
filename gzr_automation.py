@@ -112,11 +112,11 @@ class GZR_PARSE(object):
         elif ctype == 'Look':
             content_type = 'look'
 
-        gzr_command = f"gzr {content_type} cat {cid} --host {self.gzr_instance} --client-id {client_id} --client-secret {client_secret} --no-ssl --dir {self.start_path}/{save_location}/{content_type}/ --plan"
+        gzr_command = f"gzr {content_type} cat {cid} --host {self.gzr_instance} --client-id {client_id} --client-secret {client_secret} --no-ssl --dir {self.start_path}/{save_location}/{content_type}/"
         #print(gzr_command)
 
         try:
-            subprocess.run(gzr_command, timeout=20, shell=True, check=True, capture_output=True)
+            subprocess.run(gzr_command, timeout=7, shell=True, check=True, capture_output=True)
         except subprocess.TimeoutExpired as e:
             self.failed_file_list(gzr_command)
             print(f"Timeouted Error:{gzr_command}: {e}")
