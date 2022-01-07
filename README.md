@@ -1,5 +1,5 @@
 # What's this?! 
-Script to bulk download dashboards via `gzr cat` and arrange the downloaded content into a specific folder structure: Department_Name/(dashboards,looks)/content.json 
+Glad you asked! A script to bulk download dashboards via `gzr cat` and arrange the downloaded content into a specific folder structure: Department_Name/(dashboards,looks)/content.json 
 
 The downloaded content is to be used for importing content onto a target looker instance via ldeploy (looker_deployer) tool.
 
