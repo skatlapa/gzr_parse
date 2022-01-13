@@ -116,7 +116,7 @@ class GZR_PARSE(object):
         #print(gzr_command)
 
         try:
-            subprocess.run(gzr_command, timeout=7, shell=True, check=True, capture_output=True)
+            subprocess.run(gzr_command, timeout=30, shell=True, check=True, capture_output=True)
         except subprocess.TimeoutExpired as e:
             self.failed_file_list(gzr_command)
             print(f"Timeouted Error:{gzr_command}: {e}")
