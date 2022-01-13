@@ -7,12 +7,12 @@ Requires: https://github.com/looker-open-source/gzr and https://github.com/looke
 
 # Usage
 
-## Install requirements
-pip3 install -r requirements.txt
-
 ## Set-up virtual environment to install all the packages
 virtualenv .venv <br />
 source .venv/bin/activate
+
+## Install requirements
+pip3 install -r requirements.txt
 
 ## Run the script
 python3 gzr_automation.py -l /path/to/my_looker.ini -f /path/to/dashboard_info.csv -i <IP || hostname>
