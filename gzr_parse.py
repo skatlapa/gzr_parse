@@ -112,7 +112,7 @@ class GZR_PARSE(object):
         elif ctype == 'Look':
             content_type = 'look'
 
-        gzr_command = f"gzr {content_type} cat {cid} --host {self.gzr_instance} --client-id {client_id} --client-secret {client_secret} --dir {self.start_path}/{save_location}/{content_type}/"
+        gzr_command = f"gzr {content_type} cat {cid} --host {self.gzr_instance} --client-id {client_id} --client-secret {client_secret} --dir {self.start_path}/{save_location}/{content_type}/ --port=443"
         #print(gzr_command)
 
         try:
