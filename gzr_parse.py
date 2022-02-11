@@ -32,7 +32,7 @@ class GZR_PARSE(object):
                     with open(my_json_path, 'r') as myjson:
                         data = myjson.read()
                         parsed_json = json.loads(data)
-                        trash_path = Path(f"Bad_Jsons_{self.gzr_instance}")
+                        trash_path = Path(f"Trashed_content_{self.gzr_instance}")
                         try:
                             if parsed_json['deleted_at'] is not None:
                                 trash_path.mkdir(exist_ok=True)
