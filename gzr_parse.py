@@ -73,7 +73,7 @@ class GZR_PARSE(object):
 
 
     def failed_file_list(self, file_name):
-        with open('dodgy_entries.txt', 'a+') as w_fd:
+        with open('failed_exports.txt', 'a+') as w_fd:
             w_fd.write(f"{file_name}\n")
 
 
