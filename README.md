@@ -3,7 +3,7 @@ Glad you asked! A script to bulk download dashboards via `gzr cat` and arrange t
 
 The downloaded content is to be used for importing content onto a target looker instance via ldeploy (looker_deployer) tool.
 
-Requires: https://github.com/looker-open-source/gzr and https://github.com/looker-open-source/looker_deployer and python3 (3.7 ideally.. just coz)
+Requires: https://github.com/looker-open-source/gzr and https://github.com/looker-open-source/looker_deployer and python3 (3.7+ ideally.. just coz)
 
 # Usage
 
